@@ -1,8 +1,6 @@
 <?php
 
-
 namespace TheCodingMachine\HttpInteropBridge;
-
 
 use Interop\Http\Middleware\ServerMiddlewareInterface;
 use Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory;
@@ -13,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
- * A Symfony middleware that can be used to access http-interop middlewares
+ * A Symfony middleware that can be used to access http-interop middlewares.
  */
 class SymfonyToHttpInteropBridge implements HttpKernelInterface
 {
@@ -38,10 +36,10 @@ class SymfonyToHttpInteropBridge implements HttpKernelInterface
     private $httpFoundationFactory;
 
     /**
-     * @param HttpKernelInterface $nextSymfonyMiddleware The next Symfony middleware to be called (after the http-interop middleware.
-     * @param ServerMiddlewareInterface $httpInteropMiddleware The httpinterop middleware we bridge to.
+     * @param HttpKernelInterface            $nextSymfonyMiddleware The next Symfony middleware to be called (after the http-interop middleware.
+     * @param ServerMiddlewareInterface      $httpInteropMiddleware The httpinterop middleware we bridge to.
      * @param HttpFoundationFactoryInterface $httpFoundationFactory The class in charge of translating PSR-7 request/response objects to Symfony objects. Defaults to Symfony default implementation
-     * @param HttpFoundationFactoryInterface|HttpMessageFactoryInterface $httpMessageFactory The class in charge of translating Symfony request/response objects to PSR-7 objects. Defaults to Symfony default implementation (that uses Diactoros)
+     * @param HttpMessageFactoryInterface    $httpMessageFactory    The class in charge of translating Symfony request/response objects to PSR-7 objects. Defaults to Symfony default implementation (that uses Diactoros)
      */
     public function __construct(HttpKernelInterface $nextSymfonyMiddleware, ServerMiddlewareInterface $httpInteropMiddleware, HttpFoundationFactoryInterface $httpFoundationFactory = null, HttpMessageFactoryInterface $httpMessageFactory = null)
     {
@@ -51,7 +49,6 @@ class SymfonyToHttpInteropBridge implements HttpKernelInterface
         $this->httpMessageFactory = $httpMessageFactory ?: new DiactorosFactory();
     }
 
-
     /**
      * Handles a Request to convert it to a Response.
      *
@@ -59,9 +56,9 @@ class SymfonyToHttpInteropBridge implements HttpKernelInterface
      * and do its best to convert them to a Response instance.
      *
      * @param Request $request A Request instance
-     * @param int $type The type of the request
+     * @param int     $type    The type of the request
      *                         (one of HttpKernelInterface::MASTER_REQUEST or HttpKernelInterface::SUB_REQUEST)
-     * @param bool $catch Whether to catch exceptions or not
+     * @param bool    $catch   Whether to catch exceptions or not
      *
      * @return Response A Response instance
      *

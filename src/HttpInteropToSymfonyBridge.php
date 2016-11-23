@@ -1,8 +1,6 @@
 <?php
 
-
 namespace TheCodingMachine\HttpInteropBridge;
-
 
 use Interop\Http\Middleware\DelegateInterface;
 use Interop\Http\Middleware\ServerMiddlewareInterface;
@@ -37,10 +35,10 @@ class HttpInteropToSymfonyBridge implements ServerMiddlewareInterface
     private $httpFoundationFactory;
 
     /**
-     * @param HttpKernelInterface $symfonyMiddleware The next Symfony middleware to be called (after the http-interop middleware.
-     * @param ServerMiddlewareInterface $httpInteropMiddleware The httpinterop middleware we bridge to.
+     * @param HttpKernelInterface            $symfonyMiddleware     The next Symfony middleware to be called (after the http-interop middleware.
+     * @param ServerMiddlewareInterface      $httpInteropMiddleware The httpinterop middleware we bridge to.
      * @param HttpFoundationFactoryInterface $httpFoundationFactory The class in charge of translating PSR-7 request/response objects to Symfony objects. Defaults to Symfony default implementation
-     * @param HttpFoundationFactoryInterface|HttpMessageFactoryInterface $httpMessageFactory The class in charge of translating Symfony request/response objects to PSR-7 objects. Defaults to Symfony default implementation (that uses Diactoros)
+     * @param HttpMessageFactoryInterface    $httpMessageFactory    The class in charge of translating Symfony request/response objects to PSR-7 objects. Defaults to Symfony default implementation (that uses Diactoros)
      */
     public function __construct(HttpKernelInterface $symfonyMiddleware, HttpFoundationFactoryInterface $httpFoundationFactory = null, HttpMessageFactoryInterface $httpMessageFactory = null)
     {
@@ -54,7 +52,7 @@ class HttpInteropToSymfonyBridge implements ServerMiddlewareInterface
      * to the next middleware component to create the response.
      *
      * @param ServerRequestInterface $request
-     * @param DelegateInterface $delegate
+     * @param DelegateInterface      $delegate
      *
      * @return ResponseInterface
      */

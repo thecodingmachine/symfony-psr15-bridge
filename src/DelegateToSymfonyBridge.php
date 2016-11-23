@@ -1,6 +1,6 @@
 <?php
-namespace TheCodingMachine\HttpInteropBridge;
 
+namespace TheCodingMachine\HttpInteropBridge;
 
 use Interop\Http\Middleware\DelegateInterface;
 use Psr\Http\Message\RequestInterface;
@@ -11,7 +11,6 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 class DelegateToSymfonyBridge implements DelegateInterface
 {
-
     /**
      * @var HttpKernelInterface
      */

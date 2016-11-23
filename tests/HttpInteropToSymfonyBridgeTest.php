@@ -1,8 +1,6 @@
 <?php
 
-
 namespace TheCodingMachine\HttpInteropBridge;
-
 
 use Interop\Http\Middleware\DelegateInterface;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
@@ -16,12 +14,13 @@ class HttpInteropToSymfonyBridgeTest extends \PHPUnit_Framework_TestCase
     public function testProcess()
     {
         // Symfony middleware that returns 'foo'
-        $symfonyMiddleware = new class implements HttpKernelInterface {
-            public function handle(SymfonyRequest $request, $type = self::MASTER_REQUEST, $catch = true)
-            {
-                return new SymfonyResponse('foo');
-            }
-        };
+        $symfonyMiddleware = new class implements HttpKernelInterface
+         {
+             public function handle(SymfonyRequest $request, $type = self::MASTER_REQUEST, $catch = true)
+             {
+                 return new SymfonyResponse('foo');
+             }
+         };
 
         $delegate = $this->getMock(DelegateInterface::class);
 
