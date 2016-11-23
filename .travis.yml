@@ -4,13 +4,8 @@ php:
     - 7.0
     - 7.1
 
-env:
-  matrix:
-    - PREFER_LOWEST="--prefer-lowest"
-    - PREFER_LOWEST=""
-
 before_script:
-    - composer update --prefer-source $PREFER_LOWEST
+    - composer update --prefer-source
 
 script:
     - ./vendor/bin/phpunit
