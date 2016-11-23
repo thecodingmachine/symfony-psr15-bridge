@@ -1,0 +1,20 @@
+language: php
+
+php:
+    - 7.0
+    - 7.1
+
+env:
+  matrix:
+    - PREFER_LOWEST="--prefer-lowest"
+    - PREFER_LOWEST=""
+
+before_script:
+    - composer update --prefer-source $PREFER_LOWEST
+
+script:
+    - ./vendor/bin/phpunit
+
+
+after_script:
+    - ./vendor/bin/coveralls -v
