@@ -36,7 +36,6 @@ class HttpInteropToSymfonyBridge implements ServerMiddlewareInterface
 
     /**
      * @param HttpKernelInterface            $symfonyMiddleware     The next Symfony middleware to be called (after the http-interop middleware.
-     * @param ServerMiddlewareInterface      $httpInteropMiddleware The httpinterop middleware we bridge to.
      * @param HttpFoundationFactoryInterface $httpFoundationFactory The class in charge of translating PSR-7 request/response objects to Symfony objects. Defaults to Symfony default implementation
      * @param HttpMessageFactoryInterface    $httpMessageFactory    The class in charge of translating Symfony request/response objects to PSR-7 objects. Defaults to Symfony default implementation (that uses Diactoros)
      */
