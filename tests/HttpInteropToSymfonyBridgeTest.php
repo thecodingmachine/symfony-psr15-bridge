@@ -22,7 +22,7 @@ class HttpInteropToSymfonyBridgeTest extends \PHPUnit_Framework_TestCase
              }
          };
 
-        $delegate = $this->getMock(DelegateInterface::class);
+        $delegate = $this->createMock(DelegateInterface::class);
 
         $bridge = new HttpInteropToSymfonyBridge($symfonyMiddleware);
 
