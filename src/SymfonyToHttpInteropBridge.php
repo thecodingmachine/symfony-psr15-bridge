@@ -2,7 +2,7 @@
 
 namespace TheCodingMachine\HttpInteropBridge;
 
-use Interop\Http\Middleware\ServerMiddlewareInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory;
 use Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory;
 use Symfony\Bridge\PsrHttpMessage\HttpMessageFactoryInterface;
@@ -18,7 +18,7 @@ class SymfonyToHttpInteropBridge implements HttpKernelInterface
     /**
      * The httpinterop middleware we bridge to.
      *
-     * @var ServerMiddlewareInterface
+     * @var MiddlewareInterface
      */
     private $httpInteropMiddleware;
 
@@ -37,11 +37,11 @@ class SymfonyToHttpInteropBridge implements HttpKernelInterface
 
     /**
      * @param HttpKernelInterface            $nextSymfonyMiddleware The next Symfony middleware to be called (after the http-interop middleware.
-     * @param ServerMiddlewareInterface      $httpInteropMiddleware The httpinterop middleware we bridge to.
+     * @param MiddlewareInterface            $httpInteropMiddleware The httpinterop middleware we bridge to.
      * @param HttpFoundationFactoryInterface $httpFoundationFactory The class in charge of translating PSR-7 request/response objects to Symfony objects. Defaults to Symfony default implementation
      * @param HttpMessageFactoryInterface    $httpMessageFactory    The class in charge of translating Symfony request/response objects to PSR-7 objects. Defaults to Symfony default implementation (that uses Diactoros)
      */
-    public function __construct(HttpKernelInterface $nextSymfonyMiddleware, ServerMiddlewareInterface $httpInteropMiddleware, HttpFoundationFactoryInterface $httpFoundationFactory = null, HttpMessageFactoryInterface $httpMessageFactory = null)
+    public function __construct(HttpKernelInterface $nextSymfonyMiddleware, MiddlewareInterface $httpInteropMiddleware, HttpFoundationFactoryInterface $httpFoundationFactory = null, HttpMessageFactoryInterface $httpMessageFactory = null)
     {
         $this->nextSymfonyMiddleware = $nextSymfonyMiddleware;
         $this->httpInteropMiddleware = $httpInteropMiddleware;

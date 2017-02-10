@@ -2,9 +2,9 @@
 
 namespace TheCodingMachine\HttpInteropBridge;
 
-use Interop\Http\Middleware\DelegateInterface;
-use Psr\Http\Message\RequestInterface;
+use Interop\Http\ServerMiddleware\DelegateInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Bridge\PsrHttpMessage\HttpFoundationFactoryInterface;
 use Symfony\Bridge\PsrHttpMessage\HttpMessageFactoryInterface;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
@@ -42,7 +42,7 @@ class DelegateToSymfonyBridge implements DelegateInterface
      *
      * @return ResponseInterface
      */
-    public function process(RequestInterface $request)
+    public function process(ServerRequestInterface $request)
     {
         $symfonyRequest = $this->httpFoundationFactory->createRequest($request);
 

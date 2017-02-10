@@ -2,8 +2,8 @@
 
 namespace TheCodingMachine\HttpInteropBridge;
 
-use Interop\Http\Middleware\DelegateInterface;
-use Interop\Http\Middleware\ServerMiddlewareInterface;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory;
@@ -20,7 +20,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
  * Note: Symfony middlewares do not have the notion of "next" middleware built-in, so the wrapped middleware will
  * ALWAYS return a response and NEVER pass the request to the "next" middleware.
  */
-class HttpInteropToSymfonyBridge implements ServerMiddlewareInterface
+class HttpInteropToSymfonyBridge implements MiddlewareInterface
 {
     /**
      * @var HttpKernelInterface
