@@ -68,7 +68,7 @@ class SymfonyToHttpInteropBridge implements HttpKernelInterface
     {
         $psr7Request = $this->httpMessageFactory->createRequest($request);
 
-        $psr7Response = $this->httpInteropMiddleware->process($psr7Request, new DelegateToSymfonyBridge($this->nextSymfonyMiddleware, $this->httpFoundationFactory, $this->httpMessageFactory));
+        $psr7Response = $this->httpInteropMiddleware->process($psr7Request, new HttpInteropToSymfonyBridge($this->nextSymfonyMiddleware, $this->httpFoundationFactory, $this->httpMessageFactory));
 
         return $this->httpFoundationFactory->createResponse($psr7Response);
     }

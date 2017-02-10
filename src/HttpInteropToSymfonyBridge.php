@@ -20,7 +20,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
  * Note: Symfony middlewares do not have the notion of "next" middleware built-in, so the wrapped middleware will
  * ALWAYS return a response and NEVER pass the request to the "next" middleware.
  */
-class HttpInteropToSymfonyBridge implements MiddlewareInterface
+class HttpInteropToSymfonyBridge implements DelegateInterface, MiddlewareInterface
 {
     /**
      * @var HttpKernelInterface
@@ -52,11 +52,11 @@ class HttpInteropToSymfonyBridge implements MiddlewareInterface
      * to the next middleware component to create the response.
      *
      * @param ServerRequestInterface $request
-     * @param DelegateInterface      $delegate
+     * @param DelegateInterface|null $delegate
      *
      * @return ResponseInterface
      */
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate = null)
     {
         $symfonyRequest = $this->httpFoundationFactory->createRequest($request);
 
