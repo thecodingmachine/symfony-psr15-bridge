@@ -2,12 +2,13 @@
 
 namespace TheCodingMachine\HttpInteropBridge;
 
-use Interop\Http\Middleware\DelegateInterface;
-use Interop\Http\Middleware\ServerMiddlewareInterface;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory;
 use Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory;
+use Symfony\Bridge\PsrHttpMessage\HttpFoundationFactoryInterface;
 use Symfony\Bridge\PsrHttpMessage\HttpMessageFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +20,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
  * Note: Symfony middlewares do not have the notion of "next" middleware built-in, so the wrapped middleware will
  * ALWAYS return a response and NEVER pass the request to the "next" middleware.
  */
-class HttpInteropToSymfonyBridge implements ServerMiddlewareInterface
+class HttpInteropToSymfonyBridge implements DelegateInterface, MiddlewareInterface
 {
     /**
      * @var HttpKernelInterface
@@ -36,7 +37,6 @@ class HttpInteropToSymfonyBridge implements ServerMiddlewareInterface
 
     /**
      * @param HttpKernelInterface            $symfonyMiddleware     The next Symfony middleware to be called (after the http-interop middleware.
-     * @param ServerMiddlewareInterface      $httpInteropMiddleware The httpinterop middleware we bridge to.
      * @param HttpFoundationFactoryInterface $httpFoundationFactory The class in charge of translating PSR-7 request/response objects to Symfony objects. Defaults to Symfony default implementation
      * @param HttpMessageFactoryInterface    $httpMessageFactory    The class in charge of translating Symfony request/response objects to PSR-7 objects. Defaults to Symfony default implementation (that uses Diactoros)
      */
@@ -52,11 +52,11 @@ class HttpInteropToSymfonyBridge implements ServerMiddlewareInterface
      * to the next middleware component to create the response.
      *
      * @param ServerRequestInterface $request
-     * @param DelegateInterface      $delegate
+     * @param DelegateInterface|null $delegate
      *
      * @return ResponseInterface
      */
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate = null)
     {
         $symfonyRequest = $this->httpFoundationFactory->createRequest($request);
 
