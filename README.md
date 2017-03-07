@@ -7,13 +7,13 @@ Bridges between [Symfony HttpKernel](http://symfony.com/doc/current/components/h
 [![Total Downloads](https://poser.pugx.org/thecodingmachine/symfony-httpinterop-bridge/downloads)](https://packagist.org/packages/thecodingmachine/symfony-httpinterop-bridge)
 [![Latest Unstable Version](https://poser.pugx.org/thecodingmachine/symfony-httpinterop-bridge/v/unstable)](https://packagist.org/packages/thecodingmachine/symfony-httpinterop-bridge)
 [![License](https://poser.pugx.org/thecodingmachine/symfony-httpinterop-bridge/license)](https://packagist.org/packages/thecodingmachine/symfony-httpinterop-bridge)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/thecodingmachine/symfony-httpinterop-bridge/badges/quality-score.png?b=0.3)](https://scrutinizer-ci.com/g/thecodingmachine/symfony-httpinterop-bridge/?branch=0.3)
-[![Build Status](https://travis-ci.org/thecodingmachine/symfony-httpinterop-bridge.svg?branch=0.3)](https://travis-ci.org/thecodingmachine/symfony-httpinterop-bridge)
-[![Coverage Status](https://coveralls.io/repos/thecodingmachine/symfony-httpinterop-bridge/badge.svg?branch=0.3&service=github)](https://coveralls.io/github/thecodingmachine/symfony-httpinterop-bridge?branch=0.3)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/thecodingmachine/symfony-httpinterop-bridge/badges/quality-score.png?b=0.4)](https://scrutinizer-ci.com/g/thecodingmachine/symfony-httpinterop-bridge/?branch=0.4)
+[![Build Status](https://travis-ci.org/thecodingmachine/symfony-httpinterop-bridge.svg?branch=0.4)](https://travis-ci.org/thecodingmachine/symfony-httpinterop-bridge)
+[![Coverage Status](https://coveralls.io/repos/thecodingmachine/symfony-httpinterop-bridge/badge.svg?branch=0.4&service=github)](https://coveralls.io/github/thecodingmachine/symfony-httpinterop-bridge?branch=0.4)
 
 Those adapters are built on top of the existing [symfony/psr-http-message-bridge](https://github.com/symfony/psr-http-message-bridge) that bridges Symfony and PSR-7 HTTP messages.
 
-> This bridge is currently based on http-interop v0.3. As this is not yet approved by PHP-FIG, this might be subject to change!
+> This bridge is currently based on http-interop v0.4. As this is not yet approved by PHP-FIG, this might be subject to change!
 
 ## Installation
 
