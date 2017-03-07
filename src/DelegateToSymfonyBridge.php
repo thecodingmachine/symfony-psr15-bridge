@@ -7,6 +7,7 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Bridge\PsrHttpMessage\HttpFoundationFactoryInterface;
 use Symfony\Bridge\PsrHttpMessage\HttpMessageFactoryInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 class DelegateToSymfonyBridge implements DelegateInterface
@@ -24,15 +25,20 @@ class DelegateToSymfonyBridge implements DelegateInterface
      * @var HttpMessageFactoryInterface
      */
     private $httpMessageFactory;
+    /**
+     * @var Request
+     */
+    private $symfonyRequest;
 
     /**
      * @param DelegateInterface $delegate
      */
-    public function __construct(HttpKernelInterface $next, HttpFoundationFactoryInterface $httpFoundationFactory, HttpMessageFactoryInterface $httpMessageFactory)
+    public function __construct(HttpKernelInterface $next, HttpFoundationFactoryInterface $httpFoundationFactory, HttpMessageFactoryInterface $httpMessageFactory, Request $symfonyRequest)
     {
         $this->next = $next;
         $this->httpFoundationFactory = $httpFoundationFactory;
         $this->httpMessageFactory = $httpMessageFactory;
+        $this->symfonyRequest = $symfonyRequest;
     }
 
     /**
@@ -44,9 +50,18 @@ class DelegateToSymfonyBridge implements DelegateInterface
      */
     public function process(RequestInterface $request)
     {
-        $symfonyRequest = $this->httpFoundationFactory->createRequest($request);
+        $newSymfonyRequest = $this->httpFoundationFactory->createRequest($request);
 
-        $symfonyResponse = $this->next->handle($symfonyRequest);
+        // Now, let's modify the old mutable "symfonyRequest" using the new values
+        $this->symfonyRequest->attributes = $newSymfonyRequest->attributes;
+        $this->symfonyRequest->request = $newSymfonyRequest->request;
+        $this->symfonyRequest->query = $newSymfonyRequest->query;
+        $this->symfonyRequest->server = $newSymfonyRequest->server;
+        $this->symfonyRequest->files = $newSymfonyRequest->files;
+        $this->symfonyRequest->cookies = $newSymfonyRequest->cookies;
+        $this->symfonyRequest->headers = $newSymfonyRequest->headers;
+
+        $symfonyResponse = $this->next->handle($this->symfonyRequest);
 
         return $this->httpMessageFactory->createResponse($symfonyResponse);
     }

@@ -15,6 +15,9 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
  */
 class SymfonyToHttpInteropBridge implements HttpKernelInterface
 {
+
+    const SYMFONY_REQUEST = 'TheCodingMachine\\HttpInteropBridge\\SYMFONY_REQUEST';
+
     /**
      * The httpinterop middleware we bridge to.
      *
@@ -68,7 +71,9 @@ class SymfonyToHttpInteropBridge implements HttpKernelInterface
     {
         $psr7Request = $this->httpMessageFactory->createRequest($request);
 
-        $psr7Response = $this->httpInteropMiddleware->process($psr7Request, new DelegateToSymfonyBridge($this->nextSymfonyMiddleware, $this->httpFoundationFactory, $this->httpMessageFactory));
+        $psr7Request = $psr7Request->withAttribute(self::SYMFONY_REQUEST, $request);
+
+        $psr7Response = $this->httpInteropMiddleware->process($psr7Request, new DelegateToSymfonyBridge($this->nextSymfonyMiddleware, $this->httpFoundationFactory, $this->httpMessageFactory, $request));
 
         return $this->httpFoundationFactory->createResponse($psr7Response);
     }

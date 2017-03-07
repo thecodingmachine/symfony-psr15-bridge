@@ -60,6 +60,14 @@ $symfonyResponse = $symfonyKernel->handle($symfonyRequest);
 Note: the adapter's contructor takes 2 middlewares: the "next" Symfony middleware that will be called by the "delegate"
 http-interop feature and the http-interop middleware to be wrapped.
 
+### Symfony and the immutable PSR-7 requests
+
+A big difference between PSR-7 requests and Symfony requests is that PSR-7 requests are immutable. On the other hand, Symfony request/response objects are expected to be mutable.
+As such, it is common in Symfony to store requests in a "request stack" object, modify them and retrieve them later. This is a use case that is typically not recommended (and actually impossible) with PSR-7.
+
+The bridge needs to deal with this. When the `$nextSymfonyMiddleware` is called, the initial Symfony request that was passed to the `SymfonyToHttpInteropBridge` is modified to adapt to any changes performed by the PSR-15 middleware.
+So while the PSR-7 request objects are immutable, the Symfony request object is the same instance that is modified.
+
 ## Other known middleware adapters
 
 I initially planned to submit this project as a PR to [h4cc/stack-psr7-bridge](https://github.com/h4cc/stack-psr7-bridge/) (that was developed before the notion of "PSR-7 middleware" was standardized in PSR-15).
