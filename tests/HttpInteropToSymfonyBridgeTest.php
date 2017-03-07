@@ -2,7 +2,7 @@
 
 namespace TheCodingMachine\HttpInteropBridge;
 
-use Interop\Http\Middleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\DelegateInterface;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
@@ -22,7 +22,7 @@ class HttpInteropToSymfonyBridgeTest extends \PHPUnit_Framework_TestCase
              }
          };
 
-        $delegate = $this->getMock(DelegateInterface::class);
+        $delegate = $this->createMock(DelegateInterface::class);
 
         $bridge = new HttpInteropToSymfonyBridge($symfonyMiddleware);
 
