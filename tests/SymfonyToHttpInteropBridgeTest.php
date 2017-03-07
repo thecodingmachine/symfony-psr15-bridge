@@ -2,8 +2,8 @@
 
 namespace TheCodingMachine\HttpInteropBridge;
 
-use Interop\Http\Middleware\DelegateInterface;
-use Interop\Http\Middleware\ServerMiddlewareInterface;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
@@ -23,7 +23,7 @@ class SymfonyToHttpInteropBridgeTest extends \PHPUnit_Framework_TestCase
          };
 
         // HttpInterop middleware that appends 'bar' to the body
-        $serverMiddlewareInterface = new class implements ServerMiddlewareInterface
+        $serverMiddlewareInterface = new class implements MiddlewareInterface
          {
              public function process(ServerRequestInterface $request, DelegateInterface $delegate)
              {
