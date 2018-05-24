@@ -1,8 +1,8 @@
 <?php
 
-namespace TheCodingMachine\HttpInteropBridge;
+namespace TheCodingMachine\Psr15Bridge;
 
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Server\MiddlewareInterface;
 use Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory;
 use Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory;
 use Symfony\Bridge\PsrHttpMessage\HttpMessageFactoryInterface;
@@ -64,11 +64,12 @@ class SymfonyToHttpInteropBridge implements HttpKernelInterface
      *
      * @throws \Exception When an Exception occurs during processing
      */
-    public function handle(Request $request, $type = self::MASTER_REQUEST, $catch = true)
+    public function handle(Request $request, $type = self::MASTER_REQUEST, $catch = true): Response
     {
         $psr7Request = $this->httpMessageFactory->createRequest($request);
 
-        $psr7Response = $this->httpInteropMiddleware->process($psr7Request, new HttpInteropToSymfonyBridge($this->nextSymfonyMiddleware, $this->httpFoundationFactory, $this->httpMessageFactory));
+        $psr7Response = $this->httpInteropMiddleware->process($psr7Request,
+            new HttpInteropToSymfonyBridge($this->nextSymfonyMiddleware, $this->httpFoundationFactory, $this->httpMessageFactory));
 
         return $this->httpFoundationFactory->createResponse($psr7Response);
     }
