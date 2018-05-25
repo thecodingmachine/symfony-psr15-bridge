@@ -13,12 +13,12 @@ use Symfony\Bridge\PsrHttpMessage\HttpMessageFactoryInterface;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
- * A http-interop middleware that can be used to access Symfony middlewares.
+ * A psr15 middleware that can be used to access Symfony middlewares.
  *
  * Note: Symfony middlewares do not have the notion of "next" middleware built-in, so the wrapped middleware will
  * ALWAYS return a response and NEVER pass the request to the "next" middleware.
  */
-class HttpInteropToSymfonyBridge implements MiddlewareInterface, RequestHandlerInterface
+class Psr15ToSymfonyBridge implements MiddlewareInterface, RequestHandlerInterface
 {
     /**
      * @var HttpKernelInterface
@@ -34,7 +34,7 @@ class HttpInteropToSymfonyBridge implements MiddlewareInterface, RequestHandlerI
     private $httpFoundationFactory;
 
     /**
-     * @param HttpKernelInterface            $symfonyMiddleware     The next Symfony middleware to be called (after the http-interop middleware.
+     * @param HttpKernelInterface            $symfonyMiddleware     The next Symfony middleware to be called (after the psr15 middleware.
      * @param HttpFoundationFactoryInterface $httpFoundationFactory The class in charge of translating PSR-7 request/response objects to Symfony objects. Defaults to Symfony default implementation
      * @param HttpMessageFactoryInterface    $httpMessageFactory    The class in charge of translating Symfony request/response objects to PSR-7 objects. Defaults to Symfony default implementation (that uses Diactoros)
      */

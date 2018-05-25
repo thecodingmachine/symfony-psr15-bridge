@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-class SymfonyToHttpInteropBridgeTest extends \PHPUnit_Framework_TestCase
+class SymfonyToPsr15BridgeTest extends \PHPUnit_Framework_TestCase
 {
     public function testHandle()
     {
@@ -23,7 +23,7 @@ class SymfonyToHttpInteropBridgeTest extends \PHPUnit_Framework_TestCase
              }
          };
 
-        // HttpInterop middleware that appends 'bar' to the body
+        // Psr15 middleware that appends 'bar' to the body
         $middlewareInterface = new class implements MiddlewareInterface
          {
              public function process(ServerRequestInterface $request, RequestHandlerInterface $delegate): ResponseInterface
@@ -35,7 +35,7 @@ class SymfonyToHttpInteropBridgeTest extends \PHPUnit_Framework_TestCase
              }
          };
 
-        $bridge = new SymfonyToHttpInteropBridge($nextSymfonyMiddleware, $middlewareInterface);
+        $bridge = new SymfonyToPsr15Bridge($nextSymfonyMiddleware, $middlewareInterface);
 
         $request = SymfonyRequest::create('/', 'GET');
         $response = $bridge->handle($request);

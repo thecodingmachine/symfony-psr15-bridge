@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use Zend\Diactoros\ServerRequest;
 use Zend\Diactoros\Uri;
 
-class HttpInteropToSymfonyBridgeTest extends \PHPUnit_Framework_TestCase
+class Psr15ToSymfonyBridgeTest extends \PHPUnit_Framework_TestCase
 {
     public function testProcess()
     {
@@ -24,7 +24,7 @@ class HttpInteropToSymfonyBridgeTest extends \PHPUnit_Framework_TestCase
 
         $delegate = $this->createMock(RequestHandlerInterface::class);
 
-        $bridge = new HttpInteropToSymfonyBridge($symfonyMiddleware);
+        $bridge = new Psr15ToSymfonyBridge($symfonyMiddleware);
 
         $request = new ServerRequest([], [], new Uri('/'), 'GET');
         $response = $bridge->process($request, $delegate);

@@ -1,5 +1,5 @@
 {
-  "name": "thecodingmachine/symfony-httpinterop-bridge",
+  "name": "thecodingmachine/symfony-psr15-bridge",
   "description": "A bridge between Symfony middlewares (StackPHP) and compliant middleware for converting Symfony Http abstractions to PSR-15 and back.",
   "license": "MIT",
   "authors": [
