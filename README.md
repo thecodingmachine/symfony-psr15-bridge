@@ -1,26 +1,26 @@
-# thecodingmachine/symfony-httpinterop-bridge
+# thecodingmachine/symfony-psr15-bridge
 
-Bridges between [Symfony HttpKernel](http://symfony.com/doc/current/components/http_kernel/introduction.html) (a.k.a. [StackPHP Middleware](http://stackphp.com/)) and [HTTP-Interop middlewares (a.k.a PSR-15 middlewares)](https://github.com/http-interop/http-middleware) 
+Bridges between [Symfony HttpKernel](http://symfony.com/doc/current/components/http_kernel/introduction.html) (a.k.a. [StackPHP Middleware](http://stackphp.com/)) and [HTTP-Interop middlewares (a.k.a PSR-15 middlewares)](https://github.com/psr15/http-middleware) 
 
 
-[![Latest Stable Version](https://poser.pugx.org/thecodingmachine/symfony-httpinterop-bridge/v/stable)](https://packagist.org/packages/thecodingmachine/symfony-httpinterop-bridge)
-[![Total Downloads](https://poser.pugx.org/thecodingmachine/symfony-httpinterop-bridge/downloads)](https://packagist.org/packages/thecodingmachine/symfony-httpinterop-bridge)
-[![Latest Unstable Version](https://poser.pugx.org/thecodingmachine/symfony-httpinterop-bridge/v/unstable)](https://packagist.org/packages/thecodingmachine/symfony-httpinterop-bridge)
-[![License](https://poser.pugx.org/thecodingmachine/symfony-httpinterop-bridge/license)](https://packagist.org/packages/thecodingmachine/symfony-httpinterop-bridge)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/thecodingmachine/symfony-httpinterop-bridge/badges/quality-score.png?b=0.4)](https://scrutinizer-ci.com/g/thecodingmachine/symfony-httpinterop-bridge/?branch=0.4)
-[![Build Status](https://travis-ci.org/thecodingmachine/symfony-httpinterop-bridge.svg?branch=0.4)](https://travis-ci.org/thecodingmachine/symfony-httpinterop-bridge)
-[![Coverage Status](https://coveralls.io/repos/thecodingmachine/symfony-httpinterop-bridge/badge.svg?branch=0.4&service=github)](https://coveralls.io/github/thecodingmachine/symfony-httpinterop-bridge?branch=0.4)
+[![Latest Stable Version](https://poser.pugx.org/thecodingmachine/symfony-psr15-bridge/v/stable)](https://packagist.org/packages/thecodingmachine/symfony-psr15-bridge)
+[![Total Downloads](https://poser.pugx.org/thecodingmachine/symfony-psr15-bridge/downloads)](https://packagist.org/packages/thecodingmachine/symfony-psr15-bridge)
+[![Latest Unstable Version](https://poser.pugx.org/thecodingmachine/symfony-psr15-bridge/v/unstable)](https://packagist.org/packages/thecodingmachine/symfony-psr15-bridge)
+[![License](https://poser.pugx.org/thecodingmachine/symfony-psr15-bridge/license)](https://packagist.org/packages/thecodingmachine/symfony-psr15-bridge)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/thecodingmachine/symfony-psr15-bridge/badges/quality-score.png?b=0.4)](https://scrutinizer-ci.com/g/thecodingmachine/symfony-psr15-bridge/?branch=0.4)
+[![Build Status](https://travis-ci.org/thecodingmachine/symfony-psr15-bridge.svg?branch=0.4)](https://travis-ci.org/thecodingmachine/symfony-psr15-bridge)
+[![Coverage Status](https://coveralls.io/repos/thecodingmachine/symfony-psr15-bridge/badge.svg?branch=0.4&service=github)](https://coveralls.io/github/thecodingmachine/symfony-psr15-bridge?branch=0.4)
 
 Those adapters are built on top of the existing [symfony/psr-http-message-bridge](https://github.com/symfony/psr-http-message-bridge) that bridges Symfony and PSR-7 HTTP messages.
 
-> This bridge is currently based on http-interop v0.4. As this is not yet approved by PHP-FIG, this might be subject to change!
+> This bridge is currently based on psr15 v0.4. As this is not yet approved by PHP-FIG, this might be subject to change!
 
 ## Installation
 
-The recommended way to install symfony-httpinterop-bridge is through [Composer](http://getcomposer.org/):
+The recommended way to install symfony-psr15-bridge is through [Composer](http://getcomposer.org/):
 
 ```sh
-composer require thecodingmachine/symfony-httpinterop-bridge
+composer require thecodingmachine/symfony-psr15-bridge
 ```
 
 ## Usage
@@ -34,11 +34,11 @@ These implementations can be changed if needed.
 ```php
 <?php
 
-// Use the HttpInteropToSymfonyBridge adapter
-$httpInteropMiddleware = new HttpInteropToSymfonyBridge($yourHttpKernel);
+// Use the Psr15ToSymfonyBridge adapter
+$psr15Middleware = new Psr15ToSymfonyBridge($yourHttpKernel);
 
 // Handling PSR-7 requests
-$psr7Response = $httpInteropMiddleware->process($psr7Request, $dummyNextPsr7Middleware);
+$psr7Response = $psr15Middleware->process($psr7Request, $dummyNextPsr7Middleware);
 ```
 
 **Important:** Symfony Http Kernels do not have the notion of "next" middlewares. Therefore, the "next" PSR-7 middleware
@@ -50,15 +50,15 @@ you pass to the `process` method will never be called.
 ```php
 <?php
 
-// Use the HttpInteropToSymfonyBridge adapter
-$symfonyKernel = new SymfonyToHttpInteropBridge($nextSymfonyMiddleware, $yourHttpInteropMiddleware);
+// Use the Psr15ToSymfonyBridge adapter
+$symfonyKernel = new SymfonyToPsr15Bridge($nextSymfonyMiddleware, $yourPsr15Middleware);
 
 // Handling Symfony requests
 $symfonyResponse = $symfonyKernel->handle($symfonyRequest);
 ```
 
 Note: the adapter's contructor takes 2 middlewares: the "next" Symfony middleware that will be called by the "delegate"
-http-interop feature and the http-interop middleware to be wrapped.
+psr15 feature and the psr15 middleware to be wrapped.
 
 ## Other known middleware adapters
 

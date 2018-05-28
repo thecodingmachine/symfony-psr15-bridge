@@ -1,15 +1,15 @@
 <?php
 
-namespace TheCodingMachine\HttpInteropBridge;
+namespace TheCodingMachine\Psr15Bridge;
 
-use Interop\Http\ServerMiddleware\DelegateInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use Zend\Diactoros\ServerRequest;
 use Zend\Diactoros\Uri;
 
-class HttpInteropToSymfonyBridgeTest extends \PHPUnit_Framework_TestCase
+class Psr15ToSymfonyBridgeTest extends \PHPUnit_Framework_TestCase
 {
     public function testProcess()
     {
@@ -22,9 +22,9 @@ class HttpInteropToSymfonyBridgeTest extends \PHPUnit_Framework_TestCase
              }
          };
 
-        $delegate = $this->createMock(DelegateInterface::class);
+        $delegate = $this->createMock(RequestHandlerInterface::class);
 
-        $bridge = new HttpInteropToSymfonyBridge($symfonyMiddleware);
+        $bridge = new Psr15ToSymfonyBridge($symfonyMiddleware);
 
         $request = new ServerRequest([], [], new Uri('/'), 'GET');
         $response = $bridge->process($request, $delegate);
