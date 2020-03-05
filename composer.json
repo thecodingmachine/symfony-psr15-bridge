@@ -19,7 +19,7 @@
     "symfony/psr-http-message-bridge": "^1.0",
     "zendframework/zend-diactoros": "^1.0",
     "phpunit/phpunit": "^5.5",
-    "satooshi/php-coveralls": "^1.0"
+    "satooshi/php-coveralls": "^2.2"
   },
   "autoload": {
     "psr-4": {
