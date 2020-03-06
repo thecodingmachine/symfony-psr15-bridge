@@ -13,4 +13,4 @@ script:
 
 
 after_script:
-    - ./vendor/bin/coveralls -v
+    - ./vendor/bin/php-coveralls -v
