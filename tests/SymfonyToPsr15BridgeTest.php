@@ -1,7 +1,8 @@
 <?php
 
-namespace TheCodingMachine\Psr15Bridge;
+namespace TheCodingMachine\Tests\Psr15Bridge;
 
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -9,8 +10,9 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
+use TheCodingMachine\Psr15Bridge\SymfonyToPsr15Bridge;
 
-class SymfonyToPsr15BridgeTest extends \PHPUnit_Framework_TestCase
+class SymfonyToPsr15BridgeTest extends TestCase
 {
     public function testHandle()
     {

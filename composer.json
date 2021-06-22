@@ -9,7 +9,7 @@
     }
   ],
   "require": {
-    "php": ">=7.0",
+    "php": ">=7.3",
     "symfony/http-foundation": "^2.1 | ^3 | ^4",
     "psr/http-message": "^1.0",
     "psr/http-server-middleware": "^1.0"
@@ -18,12 +18,13 @@
     "symfony/http-kernel": "^2.1 | ^3 | ^4",
     "symfony/psr-http-message-bridge": "^1.0",
     "zendframework/zend-diactoros": "^1.0",
-    "phpunit/phpunit": "^5.5",
-    "php-coveralls/php-coveralls": "^2.2"
+    "php-coveralls/php-coveralls": "^2.2",
+    "phpunit/phpunit": "^9.5"
   },
   "autoload": {
     "psr-4": {
-      "TheCodingMachine\\Psr15Bridge\\": "src/"
+      "TheCodingMachine\\Psr15Bridge\\": "src/",
+      "TheCodingMachine\\Tests\\Psr15Bridge\\": "tests/"
     }
   },
   "extra": {
