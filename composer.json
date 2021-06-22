@@ -24,7 +24,7 @@
   "autoload": {
     "psr-4": {
       "TheCodingMachine\\Psr15Bridge\\": "src/",
-      "TheCodingMachine\\Tests\\Psr15Bridge\\": "tests/",
+      "TheCodingMachine\\Tests\\Psr15Bridge\\": "tests/"
     }
   },
   "extra": {
