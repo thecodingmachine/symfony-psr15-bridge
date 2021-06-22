@@ -1,15 +1,17 @@
 <?php
 
-namespace TheCodingMachine\Psr15Bridge;
+namespace TheCodingMachine\Tests\Psr15Bridge;
 
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Server\RequestHandlerInterface;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
+use TheCodingMachine\Psr15Bridge\Psr15ToSymfonyBridge;
 use Zend\Diactoros\ServerRequest;
 use Zend\Diactoros\Uri;
 
-class Psr15ToSymfonyBridgeTest extends \PHPUnit_Framework_TestCase
+class Psr15ToSymfonyBridgeTest extends TestCase
 {
     public function testProcess()
     {
